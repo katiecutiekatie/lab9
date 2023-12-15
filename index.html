@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+    <div align="center">
+        <form action="" onSubmit="CheckData(); return false;">
+            <p>Для регистрации необходимо указать ваши персональные данные</p>
+            <table>
+                <tr>
+                    <td><font color="red">*</font> Имя</td>
+                    <td><input type="text" id="name" required /></td>
+                </tr>
+                <tr>
+                    <td>Организация<br />(компания)</td>
+                    <td><input type="text" id="company" /></td>
+                </tr>
+                <tr>
+                    <td>Телефон</td>
+                    <td><input type="text" id="phone" /></td>
+                </tr>
+                <tr>
+                    <td><font color="red">*</font> Адрес эл. почты</td>
+                    <td><input type="email" id="email" required /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div align="center">
+                            <button id="bttn">Отправить</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div align="center">
+                            <button onclick="ClearAllInput()">Очистить</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <p><font color="red">*</font> Поля обязательные для заполнения</p>
+        </form>
+    </div>
+
+    <script>
+        function CheckData() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+
+            if (name === "" || email === "") {
+                alert("Пожалуйста, заполните все обязательные поля!");
+                return;
+            }
+
+            var phonePattern = /^\+?[0-9]{1,}$/;
+            if (phone !== "" && !phone.match(phonePattern)) {
+                alert("Пожалуйста, введите правильный номер телефона!");
+                return;
+            }
+
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.match(emailPattern)) {
+                alert("Пожалуйста, введите правильный адрес эл. почты!");
+                return;
+            }
+
+            if (confirm("Вы уверены, что хотите отправить данные?")) {
+                alert("Данные успешно отправлены!");
+                ClearAllInput();
+            }
+        }
+
+        function ClearAllInput() {
+            document.getElementById("name").value = "";
+            document.getElementById("company").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("email").value = "";
+        }
+    </script>
+</body>
+</html>
